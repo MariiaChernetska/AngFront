@@ -1,0 +1,25 @@
+<p>
+  contacts works!
+</p>
+<table class="table">
+    <tr>
+      <th>Name</th>
+      <th>Role</th>
+      <th>Phone</th>
+      <th>Email</th>
+      <th>Controls</th>
+    </tr>
+    <tr *ngFor="let contact of contacts">
+      <td>{{contact.name}}</td>
+      <td>{{contact.role}}</td>
+      <td>{{contact.phone}}</td>
+      <td>{{contact.email}}</td>
+      <td><span (click)="editContact(contact)">edit</span>|delete</td>
+    </tr>
+  </table>
+  <app-contacts-form *ngIf="showContactsForm" 
+                    [contact]="selectedContact" 
+                    [forEdit]="forEdit"
+                    (onContactSave)="onContactSave($event)"
+                    ></app-contacts-form>
+  <button type="button" (click)="openAddForm()">Add contact</button>

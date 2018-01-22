@@ -1,0 +1,30 @@
+<p>
+  users works!
+</p>
+<table class="table">
+  <tr>
+    <th>Name</th>
+    <th>Phone</th>
+    <th>Email</th>
+    <th>Department</th>
+    <th>UserName</th>
+    <th>Password</th>
+    <th>Controls</th>
+  </tr>
+  <tr *ngFor="let user of users">
+    <td>{{user.name}}</td>
+    <td>{{user.mobile}}</td>
+    <td>{{user.email}}</td>
+    <td>{{user.department?.name}}</td>
+    <td>{{user.username}}</td>
+    <td>{{user.password}}</td>
+    <td><span (click)="editUser(user)">edit</span>|delete</td>
+  </tr> 
+</table>
+<app-users-form *ngIf="showUsersForm" 
+    [user]="selectedUser" 
+    [departments]="departments" 
+    [forEdit]="forEdit"
+    (onUserSave)="onUserSave($event)"
+    ></app-users-form>
+<button type="button" (click)="openAddForm()">Add user</button>
