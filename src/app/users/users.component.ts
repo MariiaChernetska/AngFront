@@ -86,11 +86,14 @@ export class UsersComponent implements OnInit {
       let index = this.users.findIndex(findUser)
       if (index != -1) {
         this.users[index] = newUser;
+        this.newUsers.push(newUser)
       }
 
     }
     else {
       this.users.push(newUser)
+      this.newUsers.push(newUser)
+      
     }
     this.showUsersForm = false;
   }

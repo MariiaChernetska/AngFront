@@ -84,11 +84,13 @@ export class DepartmentsComponent implements OnInit {
       let index = this.departments.findIndex(selectObject)
       if (index != -1) {
         this.departments[index] = newDepartment;
+        this.newDepartments.push(newDepartment)
       }
 
     }
     else {
       this.departments.push(newDepartment)
+      this.newDepartments.push(newDepartment)
     }
     this.showDepartmentsForm = false;
   }

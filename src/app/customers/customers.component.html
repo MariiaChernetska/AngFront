@@ -1,6 +1,7 @@
  customers works!
 <div class="row">
     <div class="col-md-6">
+            <button type="button" (click)="openAddForm()">Add Customer</button>
         <table class="table">
             <tr>
                 <th>Name</th>
@@ -19,52 +20,21 @@
                 <td>{{customer.comments}}</td>
                 <td>{{customer.type}}</td>
                 <td>{{customer.numberOfSchools}}</td>
-                <td>
-                    <button class="btn btn-sm">edit</button>
-                    <button class="btn btn-sm">edit</button>
-                </td>
+      
+                        <td><span (click)="editCustomer(customer)">edit</span>|delete</td>
+                        
+            
             </tr>
         </table>
     </div>
     <div class="col-md-6">
-        <form [formGroup]="generalInfoForm" class="form">
-
-            <div>General info</div>
-            <div class="form-group col-md-6">
-                    <label for="">Name</label>
-                    <input type="text" class="form-control" formControlName="name" />
-            </div>
-            <div class="form-group col-md-6">
-                    <label for="">Address </label>
-                    <input type="text" class="form-control" formControlName="address" />
-            </div>
-            <div class="form-group col-md-6">
-                    <label for="">Email</label>
-                    <input type="text" class="form-control" formControlName="email" />
-            </div>     
-            <div class="form-group col-md-6">
-                    <label for="">Phone</label>
-                    <input type="text" class="form-control" formControlName="phone" />
-            </div>
-            <div class="form-group col-md-12">
-                    <label class="center-block">Type </label>
-                        <select class="form-control" class="form-control" formControlName="type">
-                            <option *ngFor="let type of customerTypes" [value]="type.id">{{type.title}}</option>
-                        </select>
-            </div>
-            <div class="form-group col-md-12">
-                    <label for="">Commnent </label>
-                    <textarea name="" id="" class="form-control" cols="30" rows="10" formControlName="comment"></textarea>
-            </div>
-            
-        </form>
-
-        <app-users></app-users>
-        <app-users-form></app-users-form>
-        <app-departments></app-departments>
        
-        <app-contacts></app-contacts>
+        <app-customer-main-form *ngIf="showCustomersForm"
+            [customer]="selectedCustomer"
+            [customerTypes]="customerTypes"
+            (onCustomerSave)="onCustomerSave($event)"
+            ></app-customer-main-form>      
         
-        <button type="click" (click)="saveCustomer()">Save customer</button>
+        
     </div>
 </div>

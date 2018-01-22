@@ -11,38 +11,69 @@ import { FormControl, FormGroup, Validators  } from '@angular/forms';
 })
 
 export class CustomersComponent implements OnInit {
-  customers: CustomerGeneral[];
+  customers: Customer[];
+  newCustomers: Customer[];
+  selectedCustomer: Customer;
   customerTypes: CustomerType[]; 
   generalInfoForm: FormGroup;
+  showCustomersForm: boolean;
+  forEdit: boolean;
   constructor(private customersService: CustomersService) {
-    this.generalInfoForm = new FormGroup({
-      'name': new FormControl('',[Validators.required]),
-      'phone': new FormControl('', Validators.required),
-      'address': new FormControl('',[Validators.required]),
-      'comment': new FormControl(''),
-      'email': new FormControl('',[Validators.required]),
-      'type': new FormControl('', Validators.required),
-
-    });
+     let customerType = new CustomerType();
+     customerType.id = 1;
+     customerType.title = "M";
+     let customerType1 = new CustomerType();
+     customerType1.id = 2;
+     customerType1.title = "B";
+     this.customerTypes = [];
+     this.customerTypes.push(customerType,customerType1)
+     this.showCustomersForm = false;
+     this.newCustomers = [];
+     this.customers = [];
+     
+     this.forEdit = false;
 
   }
 
   ngOnInit() {
     let newThis = this;
-    this.customersService.getAllCustomers().subscribe((result:CustomerGeneral[])=>{
-        newThis.customers = result;
-       }, 
-       (error)=>{});
+    // this.customersService.getAllCustomers().subscribe((result:CustomerGeneral[])=>{
+    //     newThis.customers = result;
+    //    }, 
+    //    (error)=>{});
    
-       this.customersService.getCustomerTypes().subscribe((result:CustomerType[])=>{
-        newThis.customerTypes = result;
-       }, 
-       (error)=>{});
+      //  this.customersService.getCustomerTypes().subscribe((result:CustomerType[])=>{
+      //   newThis.customerTypes = result;
+      //  }, 
+      //  (error)=>{});
    
   }
-  saveCustomer(){
+  openAddForm() {
+    this.showCustomersForm = true;
+    this.forEdit = false;
+  }
+  editCustomer(customer: Customer) {
 
+    this.showCustomersForm = true;
+    this.selectedCustomer = customer;
+    this.forEdit = true;
+  }
+  onCustomerSave(newCustomer: Customer) {
+    console.log(newCustomer)
+    function selectObject(element: Customer) {
+      return element.id == newCustomer.id
+    }
+    if (this.forEdit) {
+      let index = this.customers.findIndex(selectObject)
+      if (index != -1) {
+        this.customers[index] = newCustomer;
+      }
 
+    }
+    else {
+      this.customers.push(newCustomer)
+    }
+    this.showCustomersForm = false;
   }
 
 }

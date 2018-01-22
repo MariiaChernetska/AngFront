@@ -56,11 +56,14 @@ export class ContactsComponent implements OnInit {
         let index = this.contacts.findIndex(selectObject)
         if(index!=-1){
             this.contacts[index] = newContact;
+            this.newContacts.push(newContact)
         }
         
       }
       else{
         this.contacts.push(newContact)
+        this.newContacts.push(newContact)
+        
       }
   }
 

@@ -15,6 +15,7 @@ import { UsersFormComponent } from './users/users-form/users-form.component';
 import { DepartmentsFormComponent } from './departments/departments-form/departments-form.component';
 import { ContactsComponent } from './contacts/contacts.component';
 import { ContactsFormComponent } from './contacts/contacts-form/contacts-form.component';
+import { CustomerMainFormComponent } from './customers/customer-main-form/customer-main-form.component';
 const routes: Routes = [
   {
     path: 'login',
@@ -36,7 +37,8 @@ const routes: Routes = [
     UsersFormComponent,
     DepartmentsFormComponent,
     ContactsComponent,
-    ContactsFormComponent
+    ContactsFormComponent,
+    CustomerMainFormComponent
   ],
   imports: [
     BrowserModule,
