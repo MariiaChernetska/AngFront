@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Contact } from '../models/customer';
 
 @Component({
@@ -7,29 +7,29 @@ import { Contact } from '../models/customer';
   styleUrls: ['./contacts.component.css']
 })
 export class ContactsComponent implements OnInit {
-  contacts: Contact[];
+  @Input() contacts: Contact[];
   newContacts: Contact[];
   selectedContact: Contact;
   showContactsForm: boolean;
   forEdit: boolean;
   constructor() {
-    let mockContacts = [
-      {
-        id:1,
-        name: "Contact1",
-        phone: "12345",
-        email: "edfghj",
-        role: "Role1"
-      },
-      {
-        id:2,
-        name: "Contact2",
-        phone: "54321",
-        email: "dcfvkhjn",
-        role: "Role2"
-      }
-    ]
-    this.contacts = mockContacts;
+    // let mockContacts = [
+    //   {
+    //     id:1,
+    //     name: "Contact1",
+    //     phone: "12345",
+    //     email: "edfghj",
+    //     role: "Role1"
+    //   },
+    //   {
+    //     id:2,
+    //     name: "Contact2",
+    //     phone: "54321",
+    //     email: "dcfvkhjn",
+    //     role: "Role2"
+    //   }
+    // ]
+    //this.contacts = mockContacts;
     this.newContacts = [];
     this.showContactsForm = false;
     this.forEdit = false;

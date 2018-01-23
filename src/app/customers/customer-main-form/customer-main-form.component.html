@@ -20,6 +20,10 @@
                       <label for="">Phone</label>
                       <input type="text" class="form-control" formControlName="phone" />
               </div>
+              <div class="form-group col-md-6">
+                <label for="">NumberOfSchools</label>
+                <input type="text" class="form-control" formControlName="numberOfSchools" />
+        </div>
               <div class="form-group col-md-12">
                       <label class="center-block">Type </label>
                           <select class="form-control" class="form-control" formControlName="type">
@@ -32,8 +36,8 @@
               </div>
               
           </form>
-          <app-users></app-users>
-          <app-departments></app-departments>
-          <app-contacts></app-contacts>
+          <app-users [users]="customer.users"></app-users>
+          <app-departments [departments]="customer.departments"></app-departments>
+          <app-contacts [contacts]="customer.contacts"></app-contacts>
           <button type="button" (click)="saveCustomer()">Submit</button>
           

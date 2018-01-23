@@ -36,6 +36,7 @@ export class CustomerMainFormComponent implements OnInit {
       'comment': new FormControl(''),
       'email': new FormControl('',[Validators.required]),
       'type': new FormControl('', Validators.required),
+      'numberOfSchools': new FormControl('', Validators.required),
 
     });
   }
@@ -76,7 +77,7 @@ export class CustomerMainFormComponent implements OnInit {
         email: this.customer.email,
         phone: this.customer.phone,
         type:<string>this.customer.type,
-        comments: this.customer.comments,
+        comment: this.customer.comments,
         numberOfSchools: this.customer.numberOfSchools,
 
       })

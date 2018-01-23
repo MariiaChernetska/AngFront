@@ -26,11 +26,57 @@ export class CustomersComponent implements OnInit {
      customerType1.id = 2;
      customerType1.title = "B";
      this.customerTypes = [];
+
+     let customer = new Customer()
+     customer.id = 1;
+     customer.name = "Customer1";
+     customer.address = "sfdgh";
+     customer.email = "svfv";
+     customer.phone = "2345";
+     customer.comments = "";
+     customer.numberOfSchools = 2;
+     customer.type = customerType.title;
+     customer.contacts = [
+      {
+        id:1,
+        name: "Contact1",
+        phone: "12345",
+        email: "edfghj",
+        role: "Role1"
+      }
+     ]
+     customer.departments = [
+       {
+      
+          id: 1,
+          name: "name1",
+          manager: {
+            id: "3",
+            name: "User3",
+            mobile: "123456",
+            email: "swfe",
+            username: "hdjcndjc",
+            password: "fvgbhnj"
+          },
+          address: "address1"
+      
+       }
+     ]
+     customer.users = [
+       {
+        id: "3",
+        name: "User3",
+        mobile: "123456",
+        email: "swfe",
+        username: "hdjcndjc",
+        password: "fvgbhnj"
+       }
+     ]
      this.customerTypes.push(customerType,customerType1)
      this.showCustomersForm = false;
      this.newCustomers = [];
      this.customers = [];
-     
+     this.customers.push(customer)
      this.forEdit = false;
 
   }

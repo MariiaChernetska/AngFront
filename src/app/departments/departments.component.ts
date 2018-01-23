@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Department, User } from '../models/customer';
 
 @Component({
@@ -7,57 +7,58 @@ import { Department, User } from '../models/customer';
   styleUrls: ['./departments.component.css']
 })
 export class DepartmentsComponent implements OnInit {
-  departments: Department[];
-  users: User[];
+  @Input() departments: Department[];
+  @Input() users: User[];
   newDepartments: Department[];
   selectedDepartment: Department;
   showDepartmentsForm: boolean;
   forEdit: boolean;
   constructor() {
-    let mockUsers = [
-      {
-        id: "1",
-        name: "User1",
-        mobile: "123456",
-        email: "swfe",
-        username: "hdjcndjc",
-        password: "fvgbhnj"
-      },
-      {
-        id: "2",
-        name: "User2",
-        mobile: "123456",
-        email: "swfe",
-        username: "hdjcndjc",
-        password: "fvgbhnj"
-      },
-      {
-        id: "3",
-        name: "User3",
-        mobile: "123456",
-        email: "swfe",
-        username: "hdjcndjc",
-        password: "fvgbhnj"
-      },
+    // let mockUsers = [
+    //   {
+    //     id: "1",
+    //     name: "User1",
+    //     mobile: "123456",
+    //     email: "swfe",
+    //     username: "hdjcndjc",
+    //     password: "fvgbhnj"
+    //   },
+    //   {
+    //     id: "2",
+    //     name: "User2",
+    //     mobile: "123456",
+    //     email: "swfe",
+    //     username: "hdjcndjc",
+    //     password: "fvgbhnj"
+    //   },
+    //   {
+    //     id: "3",
+    //     name: "User3",
+    //     mobile: "123456",
+    //     email: "swfe",
+    //     username: "hdjcndjc",
+    //     password: "fvgbhnj"
+    //   },
 
-    ]
-    this.users = mockUsers;
-    let mockDepartments: Department[] = [
-      {
-        id: 1,
-        name: "name1",
-        manager: this.users[0],
-        address: "address1"
-      },
-      {
-        id: 2,
-        name: "name2",
-        manager: this.users[1],
-        address: "address2"
-      }
-    ]
+    // ]
+    //this.users = mockUsers;
+    // let mockDepartments: Department[] = [
+    //   {
+    //     id: 1,
+    //     name: "name1",
+    //     manager: this.users[0],
+    //     address: "address1"
+    //   },
+    //   {
+    //     id: 2,
+    //     name: "name2",
+    //     manager: this.users[1],
+    //     address: "address2"
+    //   }
+    // ]
 
-    this.departments = mockDepartments;
+    //this.departments = mockDepartments;
+    
     this.newDepartments = [];
     this.showDepartmentsForm = false;
     this.forEdit = false;
