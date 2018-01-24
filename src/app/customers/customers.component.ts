@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {CustomersService} from './customers.service'
 import {Customer, CustomerGeneral, CustomerType} from '../models/customer' 
 import { FormControl, FormGroup, Validators  } from '@angular/forms';
+import { RandomGenerator } from '../helpers/RandomGenerator';
 
 @Component({
   selector: 'app-customers',
@@ -28,17 +29,17 @@ export class CustomersComponent implements OnInit {
      this.customerTypes = [];
 
      let customer = new Customer()
-     customer.id = 1;
+     customer.id = RandomGenerator.generateRandomString(5);
      customer.name = "Customer1";
      customer.address = "sfdgh";
      customer.email = "svfv";
      customer.phone = "2345";
      customer.comments = "";
      customer.numberOfSchools = 2;
-     customer.type = customerType.title;
+     customer.type = customerType;
      customer.contacts = [
       {
-        id:1,
+        id:RandomGenerator.generateRandomString(5),
         name: "Contact1",
         phone: "12345",
         email: "edfghj",
@@ -48,7 +49,7 @@ export class CustomersComponent implements OnInit {
      customer.departments = [
        {
       
-          id: 1,
+          id: RandomGenerator.generateRandomString(5),
           name: "name1",
           manager: {
             id: "3",
@@ -72,7 +73,9 @@ export class CustomersComponent implements OnInit {
         password: "fvgbhnj"
        }
      ]
-     this.customerTypes.push(customerType,customerType1)
+     this.customerTypes.push(customerType)
+     this.customerTypes.push(customerType1)
+     
      this.showCustomersForm = false;
      this.newCustomers = [];
      this.customers = [];

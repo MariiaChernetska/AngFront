@@ -1,5 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Department, User } from '../models/customer';
+import { RandomGenerator } from '../helpers/RandomGenerator';
 
 @Component({
   selector: 'app-departments',
@@ -9,6 +10,8 @@ import { Department, User } from '../models/customer';
 export class DepartmentsComponent implements OnInit {
   @Input() departments: Department[];
   @Input() users: User[];
+  @Output() onDepartmentsUpdate = new EventEmitter<Department[]>();
+  
   newDepartments: Department[];
   selectedDepartment: Department;
   showDepartmentsForm: boolean;
@@ -90,9 +93,12 @@ export class DepartmentsComponent implements OnInit {
 
     }
     else {
+      newDepartment.id = RandomGenerator.generateRandomString(5);
+      
       this.departments.push(newDepartment)
       this.newDepartments.push(newDepartment)
     }
+    this.onDepartmentsUpdate.emit(this.departments)
     this.showDepartmentsForm = false;
   }
 

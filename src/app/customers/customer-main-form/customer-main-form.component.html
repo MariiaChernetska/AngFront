@@ -27,7 +27,8 @@
               <div class="form-group col-md-12">
                       <label class="center-block">Type </label>
                           <select class="form-control" class="form-control" formControlName="type">
-                              <option *ngFor="let type of customerTypes" [value]="type.id">{{type.title}}</option>
+                              <option *ngFor="let type of customerTypes" 
+                                [value]="type.id">{{type.title}}</option>
                           </select>
               </div>
               <div class="form-group col-md-12">
@@ -36,8 +37,16 @@
               </div>
               
           </form>
-          <app-users [users]="customer.users"></app-users>
-          <app-departments [departments]="customer.departments"></app-departments>
-          <app-contacts [contacts]="customer.contacts"></app-contacts>
+          <app-users 
+                [users]="customer.users" 
+                [departments]="customer.departments"
+                (onUpdateUsers)="onUpdateUsers($event)">
+        </app-users>
+          <app-departments 
+                        [departments]="customer.departments" 
+                        [users]="customer.users"
+                        (onUpdateDepartments)="onUpdateDepartments($event)">
+        </app-departments>
+          <app-contacts [contacts]="customer.contacts" ></app-contacts>
           <button type="button" (click)="saveCustomer()">Submit</button>
           

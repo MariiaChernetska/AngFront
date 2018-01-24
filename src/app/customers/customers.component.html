@@ -18,7 +18,7 @@
                 <td>{{customer.email}}</td>
                 <td>{{customer.phone}}</td>
                 <td>{{customer.comments}}</td>
-                <td>{{customer.type}}</td>
+                <td>{{customer.type.title}}</td>
                 <td>{{customer.numberOfSchools}}</td>
       
                         <td><span (click)="editCustomer(customer)">edit</span>|delete</td>
@@ -32,6 +32,7 @@
         <app-customer-main-form *ngIf="showCustomersForm"
             [customer]="selectedCustomer"
             [customerTypes]="customerTypes"
+            [forEdit]="forEdit"
             (onCustomerSave)="onCustomerSave($event)"
             ></app-customer-main-form>      
         

@@ -1,11 +1,11 @@
 export class CustomerGeneral{
-    id:number;
+    id:string;
     name: string;
     address: string;
     email: string;
     phone: string;
     comments: string;
-    type: string;
+    type: CustomerType;
     numberOfSchools?: number; 
     
   }
@@ -15,7 +15,7 @@ export class Customer extends CustomerGeneral{
     departments: Department[];
   }
  export class Contact{
-    id:number;
+    id:string;
     name: string;
     role: string;
     phone: string;
@@ -35,7 +35,7 @@ export class Customer extends CustomerGeneral{
     title: string;
   }
   export class Department{
-    id: number;
+    id: string;
     name:string;
     address: string;
     manager: User;
