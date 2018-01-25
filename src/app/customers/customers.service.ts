@@ -15,7 +15,7 @@ export class CustomersService {
     };
 
     let url = GlobalVars.apiHost+'api/Customer/GetAll';
-    return this.http.get<CustomerGeneral[]>(url);
+    return this.http.get(url);
   }
   getCustomerTypes(){
     let options = 
@@ -23,7 +23,18 @@ export class CustomersService {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
     };
 
-    let url = GlobalVars.apiHost+'api/Customer/GetCustomerTypes';
+    let url = GlobalVars.apiHost+'api/dictionaries/customerTypes';
     return this.http.get<CustomerType[]>(url);
   }
+  saveCustomer(customer:Customer){
+    let options = 
+    {
+      headers: new HttpHeaders().set('Content-Type', 'application/json'),
+    };
+    let url = GlobalVars.apiHost+'api/Customer/SaveCustomer';
+    
+    return this.http.post(url, customer, options)
+
+  }
+
 }

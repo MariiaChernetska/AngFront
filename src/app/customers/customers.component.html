@@ -1,7 +1,7 @@
- customers works!
+
 <div class="row">
-    <div class="col-md-6">
-            <button type="button" (click)="openAddForm()">Add Customer</button>
+    <div class="col-md-8 col-md-offset-2">
+            <button type="button" (click)="openAddForm()" class="btn btn-sm btn-success">Add Customer</button>
         <table class="table">
             <tr>
                 <th>Name</th>
@@ -10,6 +10,7 @@
                 <th>Phone</th>
                 <th>Comments</th>
                 <th>Type</th>
+                <th>NumberOfSchools</th>
                 <th>Controls</th>
             </tr>
             <tr *ngFor="let customer of customers">
@@ -18,10 +19,14 @@
                 <td>{{customer.email}}</td>
                 <td>{{customer.phone}}</td>
                 <td>{{customer.comments}}</td>
-                <td>{{customer.type.title}}</td>
+                <td>
+                    <span *ngFor="let type of customerTypes">
+                        <span *ngIf="type.id==customer.type">{{type.title}}</span>
+                    </span>
+                    
+                </td>
                 <td>{{customer.numberOfSchools}}</td>
-      
-                        <td><span (click)="editCustomer(customer)">edit</span>|delete</td>
+                <td><span (click)="editCustomer(customer)">edit</span>|<span (click)="deleteCustomer(customer)">delete</span></td>
                         
             
             </tr>

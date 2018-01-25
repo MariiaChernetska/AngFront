@@ -13,23 +13,7 @@ export class ContactsComponent implements OnInit {
   showContactsForm: boolean;
   forEdit: boolean;
   constructor() {
-    // let mockContacts = [
-    //   {
-    //     id:1,
-    //     name: "Contact1",
-    //     phone: "12345",
-    //     email: "edfghj",
-    //     role: "Role1"
-    //   },
-    //   {
-    //     id:2,
-    //     name: "Contact2",
-    //     phone: "54321",
-    //     email: "dcfvkhjn",
-    //     role: "Role2"
-    //   }
-    // ]
-    //this.contacts = mockContacts;
+
     this.newContacts = [];
     this.showContactsForm = false;
     this.forEdit = false;
@@ -65,6 +49,8 @@ export class ContactsComponent implements OnInit {
         this.newContacts.push(newContact)
         
       }
+      this.showContactsForm = false;
+      
   }
-
+  
 }

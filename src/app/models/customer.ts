@@ -1,12 +1,13 @@
 export class CustomerGeneral{
-    id:string;
+    id:number;
     name: string;
     address: string;
     email: string;
     phone: string;
     comments: string;
-    type: CustomerType;
-    numberOfSchools?: number; 
+    type: number;
+    numberOfSchools: number; 
+   
     
   }
 export class Customer extends CustomerGeneral{
@@ -15,7 +16,7 @@ export class Customer extends CustomerGeneral{
     departments: Department[];
   }
  export class Contact{
-    id:string;
+    id:number;
     name: string;
     role: string;
     phone: string;
@@ -26,8 +27,8 @@ export class Customer extends CustomerGeneral{
     name: string;
     mobile: string;
     email: string;
-    department?: Department;
-    username: string;
+    departmentName: string;
+    userName: string;
     password: string;
   }
   export class CustomerType{
@@ -35,8 +36,9 @@ export class Customer extends CustomerGeneral{
     title: string;
   }
   export class Department{
-    id: string;
+    id: number;
     name:string;
     address: string;
-    manager: User;
+    managerLogin: string;
   }
+ 

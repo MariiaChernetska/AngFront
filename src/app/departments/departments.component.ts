@@ -17,50 +17,7 @@ export class DepartmentsComponent implements OnInit {
   showDepartmentsForm: boolean;
   forEdit: boolean;
   constructor() {
-    // let mockUsers = [
-    //   {
-    //     id: "1",
-    //     name: "User1",
-    //     mobile: "123456",
-    //     email: "swfe",
-    //     username: "hdjcndjc",
-    //     password: "fvgbhnj"
-    //   },
-    //   {
-    //     id: "2",
-    //     name: "User2",
-    //     mobile: "123456",
-    //     email: "swfe",
-    //     username: "hdjcndjc",
-    //     password: "fvgbhnj"
-    //   },
-    //   {
-    //     id: "3",
-    //     name: "User3",
-    //     mobile: "123456",
-    //     email: "swfe",
-    //     username: "hdjcndjc",
-    //     password: "fvgbhnj"
-    //   },
-
-    // ]
-    //this.users = mockUsers;
-    // let mockDepartments: Department[] = [
-    //   {
-    //     id: 1,
-    //     name: "name1",
-    //     manager: this.users[0],
-    //     address: "address1"
-    //   },
-    //   {
-    //     id: 2,
-    //     name: "name2",
-    //     manager: this.users[1],
-    //     address: "address2"
-    //   }
-    // ]
-
-    //this.departments = mockDepartments;
+    
     
     this.newDepartments = [];
     this.showDepartmentsForm = false;
@@ -93,7 +50,7 @@ export class DepartmentsComponent implements OnInit {
 
     }
     else {
-      newDepartment.id = RandomGenerator.generateRandomString(5);
+      newDepartment.id = 0;
       
       this.departments.push(newDepartment)
       this.newDepartments.push(newDepartment)

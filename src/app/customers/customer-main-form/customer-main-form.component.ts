@@ -56,18 +56,20 @@ export class CustomerMainFormComponent implements OnInit {
     customerToSave.address = formModel.address;
     customerToSave.email = formModel.email;
     customerToSave.phone = formModel.phone;
-    customerToSave.type = this.customerTypes.find(findType);
+    customerToSave.type = formModel.type;
     customerToSave.comments = formModel.comment;
     customerToSave.numberOfSchools = formModel.numberOfSchools;
    
-    customerToSave.contacts = this.contactsComponent.newContacts;
-    customerToSave.users = this.usersComponent.newUsers;
-    customerToSave.departments = this.departmentsComponent.newDepartments;
+    customerToSave.contacts = this.contactsComponent.contacts;
+    customerToSave.users = this.usersComponent.users;
+    customerToSave.departments = this.departmentsComponent.departments;
     if(this.forEdit){
       customerToSave.id = this.customer.id;
+      
+      
     }
     else{
-      customerToSave.id = RandomGenerator.generateRandomString(5);
+      customerToSave.id = 0;
       
     }
     this.onCustomerSave.emit(customerToSave);
@@ -85,14 +87,14 @@ export class CustomerMainFormComponent implements OnInit {
     bufCustomer.departments = deps;
     this.customer = bufCustomer;
   }
-  ngOnChanges(){
+  ngOnChanges(){ 
     if(this.customer != undefined){
       this.generalInfoForm.setValue({
         name: this.customer.name,
         address: this.customer.address,
         email: this.customer.email,
         phone: this.customer.phone,
-        type:this.customer.type.id,
+        type:this.customer.type,
         comment: this.customer.comments,
         numberOfSchools: this.customer.numberOfSchools,
 

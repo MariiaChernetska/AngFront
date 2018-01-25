@@ -1,6 +1,7 @@
 import { Component, OnInit,  EventEmitter, Input, Output, OnChanges } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Contact } from '../../models/customer';
+import { RandomGenerator } from '../../helpers/RandomGenerator';
 
 @Component({
   selector: 'app-contacts-form',
@@ -35,6 +36,12 @@ export class ContactsFormComponent implements OnInit, OnChanges {
 
     if(this.forEdit){
       contactToSave.id = this.contact.id;
+     
+      
+    }
+    else{
+      contactToSave.id = 0;
+      
     }
     this.onContactSave.emit(contactToSave);
     this.contact = undefined;

@@ -1,6 +1,7 @@
 import { Component, OnInit, EventEmitter, Input, Output, OnChanges  } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { User, Department } from '../../models/customer';
+import { RandomGenerator } from '../../helpers/RandomGenerator';
 
 @Component({
   selector: 'app-departments-form',
@@ -36,11 +37,16 @@ export class DepartmentsFormComponent implements OnInit {
 
     depToSave.name = formModel.name;
     depToSave.address = formModel.address;
-    depToSave.manager = this.users.find(findManager);
+    depToSave.managerLogin = formModel.manager;
     depToSave.id = null;
-
     if(this.forEdit){
       depToSave.id = this.department.id;
+      
+    }
+    else{
+      depToSave.id = 0;
+   
+      
     }
     this.onDepartmentSave.emit(depToSave);
     this.department = undefined;
@@ -52,7 +58,7 @@ export class DepartmentsFormComponent implements OnInit {
       this.departmentsForm.setValue({
         name: this.department.name,
         address: this.department.address,
-        manager: this.department.manager.id
+        manager: this.department.managerLogin
 
       })
     }

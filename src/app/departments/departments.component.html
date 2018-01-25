@@ -1,6 +1,4 @@
-<p>
-  departments works!
-</p>
+
 <table class="table">
     <tr>
       <th>Name</th>
@@ -11,7 +9,7 @@
     <tr *ngFor="let dep of departments">
       <td>{{dep.name}}</td> 
       <td>{{dep.address}}</td>
-      <td>{{dep.manager.name}}</td>
+      <td>{{dep.managerLogin}}</td>
       <td><span (click)="editDepartment(dep)">edit</span>|delete</td>
     </tr>
   </table>
@@ -21,4 +19,4 @@
       [forEdit]="forEdit"
       (onDepartmentSave)="onDepartmentSave($event)"
   ></app-departments-form>
-<button type="button" (click)="openAddForm()">Add department</button>
+<button type="button" (click)="openAddForm()" class="btn btn-sm btn-primary">Add department</button>

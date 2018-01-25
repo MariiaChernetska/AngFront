@@ -1,4 +1,4 @@
 export class GlobalVars{
-    static apiHost = "https://localhost:44310/";
+    static apiHost = "http://localhost:44320/";
     static apiBase = GlobalVars.apiHost + "";
 }

@@ -35,10 +35,10 @@ export class LoginComponent implements OnInit {
         })
       }
 };*/
-    this.loginForm.controls['login'].statusChanges.subscribe((data) => {
-            this.loginPristine = this.loginForm.controls['login'].pristine;
-            (this.loginForm.hasError('emailInvalid', ['login'])) ? this.emailValid = false : this.emailValid = true;
-      });
+    // this.loginForm.controls['login'].statusChanges.subscribe((data) => {
+    //         this.loginPristine = this.loginForm.controls['login'].pristine;
+    //         (this.loginForm.hasError('emailInvalid', ['login'])) ? this.emailValid = false : this.emailValid = true;
+    //   });
  
    }
 

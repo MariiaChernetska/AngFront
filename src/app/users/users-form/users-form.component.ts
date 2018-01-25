@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Department, User } from '../../models/customer';
 import { FormControl, Validators, FormGroup } from '@angular/forms';
+import { RandomGenerator } from '../../helpers/RandomGenerator';
 
 @Component({
   selector: 'app-users-form',
@@ -42,13 +43,17 @@ export class UsersFormComponent implements OnInit {
     userToSave.name = formModel.name;
     userToSave.mobile = formModel.phone;
     userToSave.email = formModel.email;
-    userToSave.username = formModel.username;
+    userToSave.userName = formModel.username;
     userToSave.password = formModel.password;
-    userToSave.department = this.departments.find(findDepartment);
+    userToSave.departmentName = formModel.department;
     userToSave.id = null;
 
     if(this.forEdit){
       userToSave.id = this.user.id;
+    }
+    else{
+      userToSave.id = "";
+      
     }
     this.onUserSave.emit(userToSave);
     this.user = undefined;
@@ -61,9 +66,9 @@ export class UsersFormComponent implements OnInit {
         name: this.user.name,
         phone: this.user.mobile,
         email: this.user.email,
-        username: this.user.username,
+        username: this.user.userName,
         password: this.user.password,
-        department: this.user.department.id
+        department: this.user.departmentName
 
       })
     }

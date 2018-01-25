@@ -29,52 +29,47 @@ export class CustomersComponent implements OnInit {
      this.customerTypes = [];
 
      let customer = new Customer()
-     customer.id = RandomGenerator.generateRandomString(5);
-     customer.name = "Customer1";
-     customer.address = "sfdgh";
-     customer.email = "svfv";
-     customer.phone = "2345";
-     customer.comments = "";
-     customer.numberOfSchools = 2;
-     customer.type = customerType;
+     customer.id =  0;
+     customer.name = "TestCustomer";
+     customer.address = "Test Address";
+     customer.email = "email@email.com";
+     customer.phone= "123456";
+     customer.comments = "Some comment";
+     customer.numberOfSchools = 10;
+     customer.type =  2,
      customer.contacts = [
       {
-        id:RandomGenerator.generateRandomString(5),
-        name: "Contact1",
-        phone: "12345",
-        email: "edfghj",
-        role: "Role1"
+          id: 0,
+          name: "Contact1",
+          role: "Cool boy",
+          phone: "123456",
+          email: "email@email.com"
+        
       }
      ]
      customer.departments = [
        {
-      
-          id: RandomGenerator.generateRandomString(5),
-          name: "name1",
-          manager: {
-            id: "3",
-            name: "User3",
-            mobile: "123456",
-            email: "swfe",
-            username: "hdjcndjc",
-            password: "fvgbhnj"
-          },
-          address: "address1"
-      
+          id: 0,
+          name: "First1",
+          address: "FirstAddress1",
+          managerLogin: "vasya"
        }
      ]
      customer.users = [
        {
-        id: "3",
-        name: "User3",
-        mobile: "123456",
-        email: "swfe",
-        username: "hdjcndjc",
-        password: "fvgbhnj"
+        
+          "id": null,
+          "name": "Vasya",
+          "mobile": "123456",
+          "email": "vasya@email.com",
+          "departmentName": "First1",
+          "userName": "vasya",
+          "password": "P@ssw0rd"
+        
        }
      ]
-     this.customerTypes.push(customerType)
-     this.customerTypes.push(customerType1)
+    this.customerTypes.push(customerType)
+    this.customerTypes.push(customerType1)
      
      this.showCustomersForm = false;
      this.newCustomers = [];
@@ -91,13 +86,17 @@ export class CustomersComponent implements OnInit {
     //    }, 
     //    (error)=>{});
    
-      //  this.customersService.getCustomerTypes().subscribe((result:CustomerType[])=>{
-      //   newThis.customerTypes = result;
-      //  }, 
-      //  (error)=>{});
+      this.customersService.getCustomerTypes().subscribe((result:CustomerType[])=>{
+       newThis.customerTypes = result;
+      }, 
+      (error)=>{});
    
   }
+  deleteCustomer(customer:Customer){
+    this.customers.splice(this.customers.findIndex(x=>x.id==customer.id), 1)  
+  }
   openAddForm() {
+    this.selectedCustomer = new Customer();
     this.showCustomersForm = true;
     this.forEdit = false;
   }
@@ -122,6 +121,10 @@ export class CustomersComponent implements OnInit {
     else {
       this.customers.push(newCustomer)
     }
+    this.customersService.saveCustomer(newCustomer).subscribe((res)=>{
+
+
+    });
     this.showCustomersForm = false;
   }
 
