@@ -20,6 +20,8 @@ export class AppComponent {
   title = 'app';
   ngOnInit() {
     this.isLoggedIn = this.loginService.isLoggedIn();
+    this.isAdmin = this.loginService.isAdmin();
+    
     if(!this.isLoggedIn){
       this.router.navigate(['/login'])
     }
@@ -30,6 +32,7 @@ export class AppComponent {
   }
   ngDoCheck() {
     this.isLoggedIn = this.loginService.isLoggedIn();
+    this.isAdmin = this.loginService.isAdmin();
   }
 
 }

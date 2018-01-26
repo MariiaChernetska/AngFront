@@ -17,6 +17,7 @@ import { TabComponent  } from '../../tabset/tab.component';
 export class CustomerMainFormComponent implements OnInit {
   customers: Customer[];
   generalInfoForm: FormGroup;
+  showNumInputWindow:boolean;
   @ViewChild(DepartmentsComponent)
   private departmentsComponent: DepartmentsComponent;
 
@@ -39,12 +40,23 @@ export class CustomerMainFormComponent implements OnInit {
       'comment': new FormControl(''),
       'email': new FormControl('',[Validators.required]),
       'type': new FormControl('', Validators.required),
-      'numberOfSchools': new FormControl('', Validators.required),
+      'numberOfSchools': new FormControl(''),
 
     });
+    this.showNumInputWindow = false;
+    this.onChange = this.onChange.bind(this);
   }
 
   ngOnInit() {
+  }
+  onChange(val){
+      if(val==1){
+        this.showNumInputWindow = true;
+      }
+      else{
+        this.showNumInputWindow = false;
+        
+      }
   }
   saveCustomer(){
     console.log(this.generalInfoForm.value)
@@ -60,7 +72,12 @@ export class CustomerMainFormComponent implements OnInit {
     customerToSave.phone = formModel.phone;
     customerToSave.type = formModel.type;
     customerToSave.comments = formModel.comment;
-    customerToSave.numberOfSchools = formModel.numberOfSchools;
+    if(customerToSave.type == 2){
+      customerToSave.numberOfSchools = null;
+    }
+    else{
+      customerToSave.numberOfSchools = formModel.numberOfSchools;      
+    }
    
     customerToSave.contacts = this.contactsComponent.contacts;
     customerToSave.users = this.usersComponent.users;
@@ -92,6 +109,9 @@ export class CustomerMainFormComponent implements OnInit {
 
   ngOnChanges(){ 
     if(this.customer != undefined && this.customer.name!="" && this.customer.name!=null){
+      if(this.customer.type==1){
+        this.showNumInputWindow = true;
+      }
       this.generalInfoForm.setValue({
         name: this.customer.name,
         address: this.customer.address,

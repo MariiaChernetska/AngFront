@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewChecked } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import {CustomersService} from './customers.service'
 import {Customer, CustomerGeneral, CustomerType, CustomerViewModel} from '../models/customer' 
 import { FormControl, FormGroup, Validators  } from '@angular/forms';
@@ -11,7 +11,7 @@ import { RandomGenerator } from '../helpers/RandomGenerator';
   providers: [CustomersService]
 })
 
-export class CustomersComponent implements OnInit, AfterViewChecked {
+export class CustomersComponent implements OnInit, AfterViewInit {
   customers: Customer[];
   customersForTable: CustomerViewModel[];
   newCustomers: Customer[];
@@ -21,22 +21,11 @@ export class CustomersComponent implements OnInit, AfterViewChecked {
   showCustomersForm: boolean;
   forEdit: boolean;
   constructor(private customersService: CustomersService) {
-     let customerType = new CustomerType();
-     customerType.id = 1;
-     customerType.title = "M";
-     let customerType1 = new CustomerType();
-     customerType1.id = 2;
-     customerType1.title = "B";
+    
      this.customerTypes = [];
-
-     
-    // this.customerTypes.push(customerType)
-    // this.customerTypes.push(customerType1)
-     
      this.showCustomersForm = false;
      this.newCustomers = [];
      this.customers = [];
-     //this.customers.push(customer)
      this.forEdit = false;
 
   }
@@ -45,7 +34,7 @@ export class CustomersComponent implements OnInit, AfterViewChecked {
   
    
   }
-  ngAfterViewChecked(){
+  ngAfterViewInit(){
     let newThis = this;
     this.customersService.getAllCustomers().subscribe((result: CustomerViewModel[])=>{
         newThis.customersForTable = result;
@@ -59,7 +48,12 @@ export class CustomersComponent implements OnInit, AfterViewChecked {
   }
   deleteCustomer(customer:Customer){
     this.customers.splice(this.customers.findIndex(x=>x.id==customer.id), 1) 
-    this.customersService.deleteCustomer(customer).subscribe((res)=>{}); 
+    this.customersService.deleteCustomer(customer).subscribe((res)=>{
+      this.customersService.getAllCustomers().subscribe((result: CustomerViewModel[])=>{
+        this.customersForTable = result;
+       }, 
+    (error)=>{});
+    }); 
   }
   openAddForm() {
     this.selectedCustomer = new Customer();
@@ -70,8 +64,6 @@ export class CustomersComponent implements OnInit, AfterViewChecked {
     this.forEdit = false;
   }
   editCustomer(customer: Customer) {
-
-    
     this.customersService.getCustomer(customer.id).subscribe((res: Customer)=>{
       this.selectedCustomer = res;
       this.showCustomersForm = true;
@@ -95,7 +87,10 @@ export class CustomersComponent implements OnInit, AfterViewChecked {
       this.customers.push(newCustomer)
     }
     this.customersService.saveCustomer(newCustomer).subscribe((res)=>{
-
+      this.customersService.getAllCustomers().subscribe((result: CustomerViewModel[])=>{
+        this.customersForTable = result;
+       }, 
+    (error)=>{});
 
     });
     this.showCustomersForm = false;

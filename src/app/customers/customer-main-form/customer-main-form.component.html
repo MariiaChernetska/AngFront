@@ -27,13 +27,13 @@
                                                         </div>
                                                 </div>
                                                 <div class="row">
-                                                        <div class="form-group col-md-6" *ngIf="customer.Type==1">
+                                                        <div class="form-group col-md-6" *ngIf="showNumInputWindow">
                                                                 <label for="">NumberOfSchools</label>
-                                                                <input type="text" class="form-control" formControlName="numberOfSchools" />
+                                                                <input type="text" class="form-control"  formControlName="numberOfSchools" />
                                                         </div>
                                                         <div class="form-group col-md-12">
                                                                 <label class="center-block">Type </label>
-                                                                <select class="form-control" class="form-control" formControlName="type">
+                                                                <select class="form-control" class="form-control" formControlName="type" (change)="onChange($event.target.value)">
                                                                         <option *ngFor="let type of customerTypes" [value]="type.id">{{type.title}}</option>
                                                                 </select>
                                                         </div>
@@ -61,8 +61,8 @@
                                 </tab>
                         </tabset>
                         <div class="text-center">
-                                        <button type="button" (click)="saveCustomer()" class="btn btn-sm btn-primary">Submit</button>
-                                        
+                                <button type="button" (click)="saveCustomer()"  [disabled]="!generalInfoForm.valid" class="btn btn-sm btn-primary">Submit</button>
+
                         </div>
 
                 </div>
