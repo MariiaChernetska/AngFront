@@ -20,4 +20,5 @@
       (onDepartmentSave)="onDepartmentSave($event)"
       (onDepartmentUsersDelete)="onUpdateUsers($event)"
   ></app-departments-form>
-<button type="button" (click)="openAddForm()" class="btn btn-sm btn-primary">Add department</button>
+<button type="button" (click)="openAddForm()" class="btn btn-sm btn-primary" 
+   *ngIf="!showDepartmentsForm">Add department</button>

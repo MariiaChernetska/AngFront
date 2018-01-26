@@ -22,4 +22,4 @@
                     ></app-contacts-form>
   <button type="button" (click)="openAddForm()" 
 
-      class="btn btn-sm btn-primary">Add contact</button>
+      class="btn btn-sm btn-primary" *ngIf="!showContactsForm">Add contact</button>
