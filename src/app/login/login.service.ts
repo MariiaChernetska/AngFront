@@ -6,27 +6,67 @@ import 'rxjs/add/operator/map';
 import { Observable } from 'RxJS/Rx';
 import {GlobalVars} from '../GlobalVars'
 import {CookieService} from 'angular2-cookie/core';
+import {Router} from '@angular/router';
 @Injectable()
 export class LoginService {
 
-  constructor(private http: HttpClient, private cookieService:CookieService) { }
+  constructor(private http: HttpClient, private cookieService:CookieService, private router: Router) { }
   logIn(loginObj){
     let options = 
     {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
     };
-    let url = GlobalVars.apiHost+'api/Login/LoginRequest';
+    let url = GlobalVars.apiHost+'api/Login';
     this.http.post(url, loginObj, options).subscribe((result:any)=>{
          this.cookieService.putObject('authorizationData', { 
           token: result.token, 
-          userName: result.userName,
-          userRole: result.userRole
+          userRoles: result.roles,
+          userName: result.userName
          });
+         if(this.isAdmin()){
+          this.router.navigate(['/customers'])
+          
+         }
+         else{
+          this.router.navigate(['/userpanel'])
+          
+         }
        }, 
        (error)=>{
           
         
        });
    }
+   isLoggedIn() {
+    let authData: any = this.cookieService.getObject('authorizationData');
+    if (authData && authData.token) return true;
+    return false;
+  }
+  getUserRoles(){
+    let authData: any = this.cookieService.getObject('authorizationData');
+    return authData.userRoles;    
+  }
+  isAdmin(){
+    let authData: any = this.cookieService.getObject('authorizationData'); 
+    if(authData && authData.userRoles){
+      if(authData.userRoles.find(z=>z=="Admin")) return true;      
+    }
+    return false;
+  }
+  getUserName(){
+    let authData: any = this.cookieService.getObject('authorizationData');    
+    if(authData) return authData.userName;
+  }
+  logOut(){
+    this.cookieService.remove('authorizationData');
+   
+  }
+  getAuthorizationHeader(){
+    let authData: any = this.cookieService.getObject('authorizationData');    
+    if(authData && authData.token){
+        return "Bearer ${authData.token}";
+    }
+    return null;
+  }
 }
 

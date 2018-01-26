@@ -11,6 +11,7 @@ export class DepartmentsComponent implements OnInit {
   @Input() departments: Department[];
   @Input() users: User[];
   @Output() onDepartmentsUpdate = new EventEmitter<Department[]>();
+  @Output() onDepartmentUsersDelete = new EventEmitter<User[]>();
   
   newDepartments: Department[];
   selectedDepartment: Department;
@@ -35,6 +36,16 @@ export class DepartmentsComponent implements OnInit {
     this.showDepartmentsForm = true;
     this.selectedDepartment = dep;
     this.forEdit = true;
+  }
+  deleteDepartment(dep: Department){
+    this.departments.splice(this.departments.findIndex(x=>x.id==dep.id), 1);
+    for(let i =0; i<this.users.length;i++){
+        if(this.users[i].departmentName==dep.name){
+          this.users.splice(i, 1);
+        }
+    }
+    this.onDepartmentUsersDelete.emit(this.users);
+
   }
   onDepartmentSave(newDepartment: Department) {
     console.log(newDepartment)

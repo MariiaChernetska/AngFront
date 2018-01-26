@@ -10,7 +10,7 @@
       <td>{{dep.name}}</td> 
       <td>{{dep.address}}</td>
       <td>{{dep.managerLogin}}</td>
-      <td><span (click)="editDepartment(dep)">edit</span>|delete</td>
+      <td><span (click)="editDepartment(dep)">edit</span>|<span (click)="deleteDepartment(dep)">delete</span></td>
     </tr>
   </table>
   <app-departments-form *ngIf="showDepartmentsForm" 
@@ -18,5 +18,6 @@
       [users]="users" 
       [forEdit]="forEdit"
       (onDepartmentSave)="onDepartmentSave($event)"
+      (onDepartmentUsersDelete)="onUpdateUsers($event)"
   ></app-departments-form>
 <button type="button" (click)="openAddForm()" class="btn btn-sm btn-primary">Add department</button>

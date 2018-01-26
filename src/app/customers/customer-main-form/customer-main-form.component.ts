@@ -6,11 +6,13 @@ import { DepartmentsComponent } from '../../departments/departments.component';
 import { UsersComponent } from '../../users/users.component';
 import { ContactsComponent } from '../../contacts/contacts.component';
 import { RandomGenerator } from '../../helpers/RandomGenerator';
+import { TabsetComponent  } from '../../tabset/tabset.component';
+import { TabComponent  } from '../../tabset/tab.component';
 
 @Component({
   selector: 'app-customer-main-form',
   templateUrl: './customer-main-form.component.html',
-  styleUrls: ['./customer-main-form.component.css']
+  styleUrls: ['./customer-main-form.component.css'],
 })
 export class CustomerMainFormComponent implements OnInit {
   customers: Customer[];
@@ -87,8 +89,9 @@ export class CustomerMainFormComponent implements OnInit {
     bufCustomer.departments = deps;
     this.customer = bufCustomer;
   }
+
   ngOnChanges(){ 
-    if(this.customer != undefined){
+    if(this.customer != undefined && this.customer.name!="" && this.customer.name!=null){
       this.generalInfoForm.setValue({
         name: this.customer.name,
         address: this.customer.address,

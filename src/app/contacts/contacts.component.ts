@@ -31,6 +31,9 @@ export class ContactsComponent implements OnInit {
     this.selectedContact = contact;
     this.forEdit = true;
   }
+  deleteContact(contact: Contact){
+    this.contacts.splice(this.contacts.findIndex(x=>x.id==contact.id), 1)
+  }
   onContactSave(newContact: Contact){
     console.log(newContact)
     function selectObject(element:Contact){

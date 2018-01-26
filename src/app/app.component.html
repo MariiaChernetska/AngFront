@@ -1,8 +1,10 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <div>
- <a routerLink="/login" class="btn btn-primary">Login</a>
- <a routerLink="/customers" class="btn btn-primary">Customers</a>
+ <a routerLink="/login" class="btn btn-primary" *ngIf="!isLoggedIn">Login</a>
+ <a routerLink="/customers" class="btn btn-primary" *ngIf="isLoggedIn">Customers</a>
  
   <router-outlet></router-outlet>
+
+
 </div>
 

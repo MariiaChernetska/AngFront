@@ -41,4 +41,13 @@ export class Customer extends CustomerGeneral{
     address: string;
     managerLogin: string;
   }
- 
+ export class CustomerViewModel{
+  id:number;
+  name: string;
+  address: string;
+  email: string;
+  phone: string;
+  comments: string;
+  type: string;
+  numberOfSchools: number; 
+ }

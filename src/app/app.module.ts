@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import {CookieService} from 'angular2-cookie/core';
-
+import {HTTP_INTERCEPTORS} from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './/app-routing.module';
@@ -17,15 +17,42 @@ import { DepartmentsFormComponent } from './departments/departments-form/departm
 import { ContactsComponent } from './contacts/contacts.component';
 import { ContactsFormComponent } from './contacts/contacts-form/contacts-form.component';
 import { CustomerMainFormComponent } from './customers/customer-main-form/customer-main-form.component';
+import { AdminCanActivateGuardService } from './models/can-activate-guard.service';
+import { CanActivateIfNotAuthorizedService } from './models/can-activate-if-not-authorized.service';
+import { TabsetComponent } from './tabset/tabset.component';
+
+import { LoginService } from './login/login.service';
+import { UserPanelComponent } from './user-panel/user-panel.component';
+import { CanActivateIfAuthorizedService } from './models/can-activate-if-authorized.service';
+import { AuthInterceptor } from './models/interceptor';
+import { TabComponent } from './tabset/tab.component';
+
 const routes: Routes = [
   {
     path: 'login',
-    component: LoginComponent
+    component: LoginComponent,
+    canActivate: [
+      CanActivateIfNotAuthorizedService
+   ]
+    
+  },
+  {
+    path: 'userpanel',
+    component: UserPanelComponent,
+    canActivate: [
+      CanActivateIfAuthorizedService
+   ]
+    
   },
   {
     path: 'customers',
-    component: CustomersComponent
-  }
+    component: CustomersComponent,
+    canActivate: [
+      AdminCanActivateGuardService
+   ]
+  },
+  { path: '**', redirectTo:'/' }
+  
 ];
 
 @NgModule({
@@ -39,7 +66,10 @@ const routes: Routes = [
     DepartmentsFormComponent,
     ContactsComponent,
     ContactsFormComponent,
-    CustomerMainFormComponent
+    CustomerMainFormComponent,
+    UserPanelComponent,
+    TabComponent,
+    TabsetComponent,
   ],
   imports: [
     BrowserModule,
@@ -48,9 +78,22 @@ const routes: Routes = [
     RouterModule.forRoot(
       routes,
       { enableTracing: true } // <-- debugging purposes only
-    )
+    ),
+    
+    
   ],
-  providers: [ CookieService ],
+  providers: [ 
+    CookieService, 
+    AdminCanActivateGuardService,
+    CanActivateIfNotAuthorizedService, 
+    CanActivateIfAuthorizedService,
+    LoginService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true,
+    }
+   ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

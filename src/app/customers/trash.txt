@@ -1,0 +1,40 @@
+let customer = new Customer()
+     customer.id =  0;
+     customer.name = "TestCustomer";
+     customer.address = "Test Address";
+     customer.email = "email@email.com";
+     customer.phone= "123456";
+     customer.comments = "Some comment";
+     customer.numberOfSchools = 10;
+     customer.type =  2,
+     customer.contacts = [
+      {
+          id: 0,
+          name: "Contact1",
+          role: "Cool boy",
+          phone: "123456",
+          email: "email@email.com"
+        
+      }
+     ]
+     customer.departments = [
+       {
+          id: 0,
+          name: "First1",
+          address: "FirstAddress1",
+          managerLogin: "vasya"
+       }
+     ]
+     customer.users = [
+       {
+        
+          "id": null,
+          "name": "Vasya",
+          "mobile": "123456",
+          "email": "vasya@email.com",
+          "departmentName": "First1",
+          "userName": "vasya",
+          "password": "P@ssw0rd"
+        
+       }
+     ]

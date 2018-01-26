@@ -1,0 +1,27 @@
+<div class="container">
+  <h3>Hello, {{userName}}</h3>
+  <h4>Here is info about your customer</h4>
+      <table class="table">
+          <tr>
+              <th>Name</th>
+              <th>Address</th>
+              <th>Email</th>
+              <th>Phone</th>
+              <th>Comments</th>
+              <th>Type</th>
+              <th>NumberOfSchools</th>
+          </tr>
+          <tr *ngFor="let customer of customersForTable">
+              <td>{{customer.name}}</td>
+              <td>{{customer.address}}</td>
+              <td>{{customer.email}}</td>
+              <td>{{customer.phone}}</td>
+              <td>{{customer.comments}}</td>
+      
+              <td>{{customer.type}}</td>
+              <td>{{customer.numberOfSchools}}</td>
+                      
+          
+          </tr>
+      </table>
+</div>

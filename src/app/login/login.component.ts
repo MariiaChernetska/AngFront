@@ -20,25 +20,7 @@ export class LoginComponent implements OnInit {
       'password': new FormControl('', Validators.required)
     });
 
-    //this.regService.success = ()=>this.route.navigate(['/office']);
-    
-    /*this.regService.fail = (error)=> {
-     let mythis = this;
-      if(error.modelState['user.Login'] != undefined){
-        error.modelState['user.Login'].forEach(function(item, i, arr){
-             mythis.errorMessage.push(item)
-        })
-      }
-      if(error.modelState['user.Password'] != undefined){
-         error.modelState['user.Password'].forEach(function(item, i, arr){
-             mythis.errorMessage.push(item)
-        })
-      }
-};*/
-    // this.loginForm.controls['login'].statusChanges.subscribe((data) => {
-    //         this.loginPristine = this.loginForm.controls['login'].pristine;
-    //         (this.loginForm.hasError('emailInvalid', ['login'])) ? this.emailValid = false : this.emailValid = true;
-    //   });
+   
  
    }
 

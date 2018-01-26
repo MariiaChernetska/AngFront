@@ -14,6 +14,7 @@ export class UsersComponent implements OnInit {
  newUsers: User[];
   selectedUser: User;
   showUsersForm: boolean;
+  
   forEdit: boolean;
   constructor() {
     // let mockUsers = [
@@ -72,6 +73,9 @@ export class UsersComponent implements OnInit {
   openAddForm() {
     this.showUsersForm = true;
     this.forEdit = false;
+  }
+  deleteUser(user: User){
+    this.users.splice(this.users.findIndex(x=>x.id==user.id), 1)
   }
   editUser(user: User) {
 

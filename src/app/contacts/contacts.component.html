@@ -12,7 +12,7 @@
       <td>{{contact.role}}</td>
       <td>{{contact.phone}}</td>
       <td>{{contact.email}}</td>
-      <td><span (click)="editContact(contact)">edit</span>|delete</td>
+      <td><span (click)="editContact(contact)">edit</span>| <span (click)="deleteContact(contact)">delete</span> </td>
     </tr>
   </table>
   <app-contacts-form *ngIf="showContactsForm" 

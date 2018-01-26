@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {CustomersService} from './customers.service'
-import {Customer, CustomerGeneral, CustomerType} from '../models/customer' 
+import {Customer, CustomerGeneral, CustomerType, CustomerViewModel} from '../models/customer' 
 import { FormControl, FormGroup, Validators  } from '@angular/forms';
 import { RandomGenerator } from '../helpers/RandomGenerator';
 
@@ -13,6 +13,7 @@ import { RandomGenerator } from '../helpers/RandomGenerator';
 
 export class CustomersComponent implements OnInit {
   customers: Customer[];
+  customersForTable: CustomerViewModel[];
   newCustomers: Customer[];
   selectedCustomer: Customer;
   customerTypes: CustomerType[]; 
@@ -28,63 +29,24 @@ export class CustomersComponent implements OnInit {
      customerType1.title = "B";
      this.customerTypes = [];
 
-     let customer = new Customer()
-     customer.id =  0;
-     customer.name = "TestCustomer";
-     customer.address = "Test Address";
-     customer.email = "email@email.com";
-     customer.phone= "123456";
-     customer.comments = "Some comment";
-     customer.numberOfSchools = 10;
-     customer.type =  2,
-     customer.contacts = [
-      {
-          id: 0,
-          name: "Contact1",
-          role: "Cool boy",
-          phone: "123456",
-          email: "email@email.com"
-        
-      }
-     ]
-     customer.departments = [
-       {
-          id: 0,
-          name: "First1",
-          address: "FirstAddress1",
-          managerLogin: "vasya"
-       }
-     ]
-     customer.users = [
-       {
-        
-          "id": null,
-          "name": "Vasya",
-          "mobile": "123456",
-          "email": "vasya@email.com",
-          "departmentName": "First1",
-          "userName": "vasya",
-          "password": "P@ssw0rd"
-        
-       }
-     ]
-    this.customerTypes.push(customerType)
-    this.customerTypes.push(customerType1)
+     
+    // this.customerTypes.push(customerType)
+    // this.customerTypes.push(customerType1)
      
      this.showCustomersForm = false;
      this.newCustomers = [];
      this.customers = [];
-     this.customers.push(customer)
+     //this.customers.push(customer)
      this.forEdit = false;
 
   }
 
   ngOnInit() {
     let newThis = this;
-    // this.customersService.getAllCustomers().subscribe((result:CustomerGeneral[])=>{
-    //     newThis.customers = result;
-    //    }, 
-    //    (error)=>{});
+    this.customersService.getAllCustomers().subscribe((result: CustomerViewModel[])=>{
+        newThis.customersForTable = result;
+       }, 
+    (error)=>{});
    
       this.customersService.getCustomerTypes().subscribe((result:CustomerType[])=>{
        newThis.customerTypes = result;
@@ -93,18 +55,26 @@ export class CustomersComponent implements OnInit {
    
   }
   deleteCustomer(customer:Customer){
-    this.customers.splice(this.customers.findIndex(x=>x.id==customer.id), 1)  
+    this.customers.splice(this.customers.findIndex(x=>x.id==customer.id), 1) 
+    this.customersService.deleteCustomer(customer).subscribe((res)=>{}); 
   }
   openAddForm() {
     this.selectedCustomer = new Customer();
+    this.selectedCustomer.departments = [];
+    this.selectedCustomer.users = [];
+    this.selectedCustomer.contacts = []; 
     this.showCustomersForm = true;
     this.forEdit = false;
   }
   editCustomer(customer: Customer) {
 
-    this.showCustomersForm = true;
-    this.selectedCustomer = customer;
-    this.forEdit = true;
+    
+    this.customersService.getCustomer(customer.id).subscribe((res: Customer)=>{
+      this.selectedCustomer = res;
+      this.showCustomersForm = true;
+      this.forEdit = true;
+    })
+   
   }
   onCustomerSave(newCustomer: Customer) {
     console.log(newCustomer)

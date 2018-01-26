@@ -1,7 +1,10 @@
 
 <div class="row">
     <div class="col-md-8 col-md-offset-2">
-            <button type="button" (click)="openAddForm()" class="btn btn-sm btn-success">Add Customer</button>
+        <div class="text-center">
+                <button type="button" (click)="openAddForm()" class="btn btn-sm btn-success">Add Customer</button>
+                
+        </div>
         <table class="table">
             <tr>
                 <th>Name</th>
@@ -13,18 +16,19 @@
                 <th>NumberOfSchools</th>
                 <th>Controls</th>
             </tr>
-            <tr *ngFor="let customer of customers">
+            <tr *ngFor="let customer of customersForTable">
                 <td>{{customer.name}}</td>
                 <td>{{customer.address}}</td>
                 <td>{{customer.email}}</td>
                 <td>{{customer.phone}}</td>
                 <td>{{customer.comments}}</td>
-                <td>
+                <!--td>
                     <span *ngFor="let type of customerTypes">
                         <span *ngIf="type.id==customer.type">{{type.title}}</span>
                     </span>
                     
-                </td>
+                </td-->
+                <td>{{customer.type}}</td>
                 <td>{{customer.numberOfSchools}}</td>
                 <td><span (click)="editCustomer(customer)">edit</span>|<span (click)="deleteCustomer(customer)">delete</span></td>
                         
@@ -32,7 +36,7 @@
             </tr>
         </table>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-12">
        
         <app-customer-main-form *ngIf="showCustomersForm"
             [customer]="selectedCustomer"
