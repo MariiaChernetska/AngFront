@@ -1,7 +1,6 @@
 import { Component, OnInit, EventEmitter, Input, Output, OnChanges  } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { User, Department } from '../../models/customer';
-import { RandomGenerator } from '../../helpers/RandomGenerator';
 
 @Component({
   selector: 'app-departments-form',

@@ -5,7 +5,6 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { DepartmentsComponent } from '../../departments/departments.component';
 import { UsersComponent } from '../../users/users.component';
 import { ContactsComponent } from '../../contacts/contacts.component';
-import { RandomGenerator } from '../../helpers/RandomGenerator';
 import { TabsetComponent  } from '../../tabset/tabset.component';
 import { TabComponent  } from '../../tabset/tab.component';
 

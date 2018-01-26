@@ -1,7 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Department, User } from '../../models/customer';
 import { FormControl, Validators, FormGroup } from '@angular/forms';
-import { RandomGenerator } from '../../helpers/RandomGenerator';
 
 @Component({
   selector: 'app-users-form',

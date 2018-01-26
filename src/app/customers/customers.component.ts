@@ -2,7 +2,7 @@ import { Component, OnInit, AfterViewInit } from '@angular/core';
 import {CustomersService} from './customers.service'
 import {Customer, CustomerGeneral, CustomerType, CustomerViewModel} from '../models/customer' 
 import { FormControl, FormGroup, Validators  } from '@angular/forms';
-import { RandomGenerator } from '../helpers/RandomGenerator';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-customers',
@@ -20,7 +20,7 @@ export class CustomersComponent implements OnInit, AfterViewInit {
   generalInfoForm: FormGroup;
   showCustomersForm: boolean;
   forEdit: boolean;
-  constructor(private customersService: CustomersService) {
+  constructor(private customersService: CustomersService, private router: Router) {
     
      this.customerTypes = [];
      this.showCustomersForm = false;
@@ -39,12 +39,20 @@ export class CustomersComponent implements OnInit, AfterViewInit {
     this.customersService.getAllCustomers().subscribe((result: CustomerViewModel[])=>{
         newThis.customersForTable = result;
        }, 
-    (error)=>{});
+    (error)=>{
+      if(error.Code == 401){
+        this.router.navigate(['/customers'])
+      }
+    });
    
       this.customersService.getCustomerTypes().subscribe((result:CustomerType[])=>{
        newThis.customerTypes = result;
       }, 
-      (error)=>{});
+      (error)=>{
+        if(error.Code == 401){
+          this.router.navigate(['/customers'])
+        }
+      });
   }
   deleteCustomer(customer:Customer){
     this.customers.splice(this.customers.findIndex(x=>x.id==customer.id), 1) 

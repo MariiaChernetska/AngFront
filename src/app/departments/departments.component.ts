@@ -1,6 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Department, User } from '../models/customer';
-import { RandomGenerator } from '../helpers/RandomGenerator';
 
 @Component({
   selector: 'app-departments',

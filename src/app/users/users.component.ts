@@ -1,6 +1,5 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import {User, Department} from '../models/customer'
-import { RandomGenerator } from '../helpers/RandomGenerator';
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
@@ -97,7 +96,7 @@ export class UsersComponent implements OnInit {
 
     }
     else {
-      newUser.id = RandomGenerator.generateRandomString(5);
+      newUser.id = "";
       this.users.push(newUser)
       this.newUsers.push(newUser)
       
