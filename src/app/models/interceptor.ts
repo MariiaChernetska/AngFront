@@ -12,6 +12,7 @@ export class AuthInterceptor implements HttpInterceptor {
   }
   getAuthorizationHeader(){
     let authData: any = this.cookieService.getObject('authorizationData');  
+    console.log(authData)
     if(authData && authData.token){
         return "Bearer "+authData.token;
     }

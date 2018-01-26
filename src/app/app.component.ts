@@ -11,6 +11,7 @@ import { LoginService } from './login/login.service';
 })
 export class AppComponent {
   isLoggedIn: boolean = false;
+  isAdmin: boolean = false;
   constructor(private cookieService: CookieService, 
               private router: Router, 
               private loginService:LoginService) {
@@ -22,14 +23,13 @@ export class AppComponent {
     if(!this.isLoggedIn){
       this.router.navigate(['/login'])
     }
-    else{
-      this.router.navigate(['/customers'])
-      
-    }
+    
   }
- 
+  logout(){
+    this.loginService.logOut();
+  }
   ngDoCheck() {
-  
+    this.isLoggedIn = this.loginService.isLoggedIn();
   }
 
 }

@@ -1,7 +1,9 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <div>
  <a routerLink="/login" class="btn btn-primary" *ngIf="!isLoggedIn">Login</a>
- <a routerLink="/customers" class="btn btn-primary" *ngIf="isLoggedIn">Customers</a>
+ <a routerLink="/customers" class="btn btn-primary" *ngIf="isLoggedIn && isAdmin">Customers</a>
+ <a routerLink="/userpanel" class="btn btn-primary" *ngIf="isLoggedIn">UserPanel</a>
+ <button class="btn btn-primary" *ngIf="isLoggedIn" (click)="logout()">Log out</button>
  
   <router-outlet></router-outlet>
 

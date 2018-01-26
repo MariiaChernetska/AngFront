@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewChecked } from '@angular/core';
 import {CustomersService} from './customers.service'
 import {Customer, CustomerGeneral, CustomerType, CustomerViewModel} from '../models/customer' 
 import { FormControl, FormGroup, Validators  } from '@angular/forms';
@@ -11,7 +11,7 @@ import { RandomGenerator } from '../helpers/RandomGenerator';
   providers: [CustomersService]
 })
 
-export class CustomersComponent implements OnInit {
+export class CustomersComponent implements OnInit, AfterViewChecked {
   customers: Customer[];
   customersForTable: CustomerViewModel[];
   newCustomers: Customer[];
@@ -42,6 +42,10 @@ export class CustomersComponent implements OnInit {
   }
 
   ngOnInit() {
+  
+   
+  }
+  ngAfterViewChecked(){
     let newThis = this;
     this.customersService.getAllCustomers().subscribe((result: CustomerViewModel[])=>{
         newThis.customersForTable = result;
@@ -52,7 +56,6 @@ export class CustomersComponent implements OnInit {
        newThis.customerTypes = result;
       }, 
       (error)=>{});
-   
   }
   deleteCustomer(customer:Customer){
     this.customers.splice(this.customers.findIndex(x=>x.id==customer.id), 1) 

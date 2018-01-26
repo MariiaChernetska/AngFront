@@ -16,7 +16,7 @@ export class LoginService {
     {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
     };
-    let url = GlobalVars.apiHost+'api/Login';
+    let url = GlobalVars.apiHost+'api/Login/LoginRequest';
     this.http.post(url, loginObj, options).subscribe((result:any)=>{
          this.cookieService.putObject('authorizationData', { 
           token: result.token, 
@@ -58,7 +58,12 @@ export class LoginService {
     if(authData) return authData.userName;
   }
   logOut(){
-    this.cookieService.remove('authorizationData');
+    let url = GlobalVars.apiHost+'api/Login/Logout';
+    this.http.get(url).subscribe((res)=>{
+      this.cookieService.remove('authorizationData');
+      this.router.navigate(['/login'])
+      
+    })
    
   }
   getAuthorizationHeader(){
